@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl } from '@angular/forms';
+import { FormControl, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-basic-form',
@@ -8,12 +8,17 @@ import { FormControl } from '@angular/forms';
 })
 export class BasicFormComponent implements OnInit {
 
-  public nameField = new FormControl('');
+  public nameField = new FormControl('', [Validators.required, Validators.maxLength(10)]);
   public emailField = new FormControl('');
   public phoneField = new FormControl('');
   public colorField = new FormControl('#780d0d ');
   public dateField = new FormControl('');
-  public ageField = new FormControl('');
+  public ageField = new FormControl(12);
+  public categoryField = new FormControl('category-2');
+  public tagField = new FormControl('');
+  public agreeField = new FormControl(false);
+  public genderField = new FormControl('');
+  public zoneField = new FormControl('');
 
   ngOnInit(): void {
     this.nameField.valueChanges
@@ -24,6 +29,14 @@ export class BasicFormComponent implements OnInit {
 
   public getNameFliedValue(): void {
     console.log(this.nameField.value);
+  }
+
+  get isNameFieldValid() {
+    return this.nameField.touched && this.nameField.valid;
+  }
+
+  get isNameFieldInValid() {
+    return this.nameField.touched && this.nameField.invalid;
   }
 
 }

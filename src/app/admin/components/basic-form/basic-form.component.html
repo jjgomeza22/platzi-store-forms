@@ -1,8 +1,23 @@
 <p>
-  Name: {{ nameField.value }}
-  <input type="text" [formControl]="nameField"/>
-  <button (click)="getNameFliedValue()" >Get value</button>
+  Name: {{ nameField.valid }}
+  <input
+    [class.is-valid]="isNameFieldValid"
+    [class.is-invalid]="isNameFieldInValid"
+    type="text"
+    [formControl]="nameField"
+  />
+  <button [disabled]="nameField.invalid" (click)="getNameFliedValue()" >Get value</button>
 </p>
+
+<div class="messages" [class.active]="isNameFieldInValid">
+  <p *ngIf="nameField.touched && nameField.hasError('required')">
+    <strong>Este campo es requerido</strong>
+  </p>
+
+  <p *ngIf="nameField.touched && nameField.hasError('maxlength')">
+    <strong>Debe tener maximo 10 caracteres</strong>
+  </p>
+</div>
 
 <p>
   Email: {{ emailField.value }}
@@ -27,4 +42,61 @@
 <p>
   Age: {{ ageField.value }}
   <input type="number" [formControl]="ageField"/>
+</p>
+
+<p>
+  Category: {{ categoryField.value }}
+  <select [formControl]="categoryField">
+    <option value="category-1">category 1</option>
+    <option value="category-2">category 2</option>
+    <option value="category-3">category 3</option>
+    <option value="category-4">category 4</option>
+  </select>
+</p>
+
+<p>
+  Tags: {{ tagField.value }}
+  <select [formControl]="tagField" multiple>
+    <option value="tag-1">tag 1</option>
+    <option value="tag-2">tag 2</option>
+    <option value="tag-3">tag 3</option>
+    <option value="tag-4">tag 4</option>
+  </select>
+</p>
+
+<p>
+  Agree: {{ agreeField.value }}
+  <input type="checkbox" [formControl]="agreeField"/>
+</p>
+
+<p>
+  Gender: {{ genderField.value }}
+  <label>
+    <input name="gender" type="radio" value="male" [formControl]="genderField"/>
+    Male
+  </label>
+  <label>
+    <input name="gender" type="radio" value="female" [formControl]="genderField"/>
+    Female
+  </label>
+  <label>
+    <input name="gender" type="radio" value="other" [formControl]="genderField"/>
+    Other
+  </label>
+</p>
+
+<p>
+  Zone: {{ zoneField.value }}
+  <label>
+    <input name="zone" type="radio" value="Zona1" [formControl]="zoneField"/>
+    Zona1
+  </label>
+  <label>
+    <input name="zone" type="radio" value="Zona2" [formControl]="zoneField"/>
+    Zona2
+  </label>
+  <label>
+    <input name="zone" type="radio" value="Zona3" [formControl]="zoneField"/>
+    Zona3
+  </label>
 </p>
