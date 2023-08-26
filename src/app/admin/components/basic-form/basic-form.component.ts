@@ -8,7 +8,12 @@ import { FormControl } from '@angular/forms';
 })
 export class BasicFormComponent implements OnInit {
 
-  nameField = new FormControl(' soy un control');
+  public nameField = new FormControl('');
+  public emailField = new FormControl('');
+  public phoneField = new FormControl('');
+  public colorField = new FormControl('#780d0d ');
+  public dateField = new FormControl('');
+  public ageField = new FormControl('');
 
   ngOnInit(): void {
     this.nameField.valueChanges
@@ -17,7 +22,7 @@ export class BasicFormComponent implements OnInit {
     });
   }
 
-  getNameFliedValue() {
+  public getNameFliedValue(): void {
     console.log(this.nameField.value);
   }
 
