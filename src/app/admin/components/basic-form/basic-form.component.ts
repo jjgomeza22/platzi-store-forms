@@ -9,15 +9,15 @@ import { FormControl, Validators, FormGroup, FormBuilder } from '@angular/forms'
 export class BasicFormComponent implements OnInit {
 
   public form = new FormGroup({
-    name: new FormControl('', [Validators.required, Validators.maxLength(10)]),
-    email: new FormControl(''),
-    phone: new FormControl(''),
+    name: new FormControl('', [Validators.required, Validators.maxLength(10), Validators.pattern(/^[a-zA-Z]+$/)]),
+    email: new FormControl('', [Validators.required, Validators.email]),
+    phone: new FormControl('', Validators.required),
     color: new FormControl('#780d0d '),
     date: new FormControl(''),
-    age: new FormControl(12),
+    age: new FormControl(12, [Validators.required, Validators.min(18), Validators.max(100)]),
     category: new FormControl('category-2'),
     tag: new FormControl(''),
-    agree: new FormControl(false),
+    agree: new FormControl(false, [Validators.requiredTrue]),
     gender: new FormControl(''),
     zone: new FormControl(''),
   });
@@ -111,10 +111,10 @@ export class BasicFormComponent implements OnInit {
   }
 
   save() {
-    if (this.form1.valid) {
+    if (this.form.valid) {
       console.log(this.form.value);
     } else {
-      this.form1.markAllAsTouched();
+      this.form.markAllAsTouched();
     }
   }
 

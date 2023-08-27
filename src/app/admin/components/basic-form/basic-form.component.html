@@ -9,7 +9,6 @@
     />
     <button [disabled]="name.invalid" (click)="getNameFliedValue()" >Get value</button>
   </p>
-
   <div class="messages" [class.active]="isNameFieldInValid">
     <p *ngIf="name.touched && name.hasError('required')">
       <strong>Este campo es requerido</strong>
@@ -24,6 +23,15 @@
     Email: {{ email.value }}
     <input type="email" formControlName="email"/>
   </p>
+  <div class="messages" [class.active]="email.touched && email.invalid">
+    <p *ngIf="email.hasError('required')">
+      <strong>Este campo es requerido</strong>
+    </p>
+
+    <p *ngIf="email.hasError('email')">
+      <strong>Email invaliddo</strong>
+    </p>
+  </div>
 
   <p>
     PhoneNumber: {{ phone.value }}
@@ -44,6 +52,18 @@
     Age: {{ age.value }}
     <input type="number" formControlName="age"/>
   </p>
+  <div class="messages" [class.active]="age.touched && age.invalid">
+    <p *ngIf="age.hasError('required')">
+      <strong>Este campo es requerido</strong>
+    </p>
+
+    <p *ngIf="age.hasError('min')">
+      <strong>Debe ser mayor de edad</strong>
+    </p>
+    <p *ngIf="age.hasError('max')">
+      <strong>Debe ser menor a 100 años</strong>
+    </p>
+  </div>
 
   <p>
     Category: {{ category.value }}
@@ -103,7 +123,7 @@
   </p>
 
   <p>
-    <button [disabled]="form.invalid" type="submit">Enviar</button>
+    <button type="submit">Enviar</button>
   </p>
 
 </form>
