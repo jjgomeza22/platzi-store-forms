@@ -18,6 +18,16 @@ export class MyValidators {
     }
     return null;
   }
+
+  static matchPasswords(control: AbstractControl){
+    const password = control.get('password').value;
+    const confirmPassword = control.get('confirmPassword').value;
+
+    if (password !== confirmPassword) {
+      return {password_not_match: true}
+    }
+    return null;
+  }
 }
 
 function isValid (value: string): boolean {

@@ -41,6 +41,10 @@ export class RegisterComponent implements OnInit {
     this.form = this.formBuilder.group({
       email: ['', [Validators.required]],
       password: ['', [Validators.required, Validators.minLength(6), MyValidators.validatePassword]],
+      confirmPassword: ['', [Validators.required]]
+    },
+    {
+      validators: MyValidators.matchPasswords
     });
   }
 
@@ -50,5 +54,9 @@ export class RegisterComponent implements OnInit {
 
   get password(){
     return this.form.get('password');
+  }
+
+  get confirmPassword() {
+    return this.form.get('confirmPassword');
   }
 }
