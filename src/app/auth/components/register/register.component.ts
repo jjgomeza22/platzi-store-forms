@@ -41,10 +41,22 @@ export class RegisterComponent implements OnInit {
     this.form = this.formBuilder.group({
       email: ['', [Validators.required]],
       password: ['', [Validators.required, Validators.minLength(6), MyValidators.validatePassword]],
-      confirmPassword: ['', [Validators.required]]
+      confirmPassword: ['', [Validators.required]],
+      type: ['company', Validators.required],
+      companyName: ['', Validators.required],
     },
     {
       validators: MyValidators.matchPasswords
+    });
+
+    this.type.valueChanges
+    .subscribe(value => {
+      if (value === 'company') {
+        this.companyName.setValidators([Validators.required]);
+      } else {
+        this.companyName.setValidators(null);
+      }
+      this.companyName.updateValueAndValidity();
     });
   }
 
@@ -58,5 +70,13 @@ export class RegisterComponent implements OnInit {
 
   get confirmPassword() {
     return this.form.get('confirmPassword');
+  }
+
+  get type() {
+    return this.form.get('type');
+  }
+
+  get companyName() {
+    return this.form.get('companyName');
   }
 }
