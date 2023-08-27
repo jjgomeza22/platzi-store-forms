@@ -1,22 +1,37 @@
-<form [formGroup]="form" (ngSubmit)="save()">
-  <p>
-    Name: {{ name.valid }}
-    <input
-      [class.is-valid]="isNameFieldValid"
-      [class.is-invalid]="isNameFieldInValid"
-      type="text"
-      formControlName="name"
-    />
-    <button [disabled]="name.invalid" (click)="getNameFliedValue()" >Get value</button>
-  </p>
-  <div class="messages" [class.active]="isNameFieldInValid">
-    <p *ngIf="name.touched && name.hasError('required')">
-      <strong>Este campo es requerido</strong>
+<form [formGroup]="form1" (ngSubmit)="save()">
+  <div formGroupName="fullName">
+    <p>
+      Name: {{ name.valid }}
+      <input
+        [class.is-valid]="isNameFieldValid"
+        [class.is-invalid]="isNameFieldInValid"
+        type="text"
+        formControlName="name"
+      />
+      <button [disabled]="name.invalid" (click)="getNameFliedValue()" >Get value</button>
     </p>
+    <div class="messages" [class.active]="isNameFieldInValid">
+      <p *ngIf="name.touched && name.hasError('required')">
+        <strong>Este campo es requerido</strong>
+      </p>
 
-    <p *ngIf="name.touched && name.hasError('maxlength')">
-      <strong>Debe tener maximo 10 caracteres</strong>
+      <p *ngIf="name.touched && name.hasError('maxlength')">
+        <strong>Debe tener maximo 10 caracteres</strong>
+      </p>
+    </div>
+
+    <p>
+      LastName: {{ lastName.valid }}
+      <input
+        type="text"
+        formControlName="lastName"
+      />
     </p>
+    <div class="messages" [class.active]="lastName.invalid && lastName.touched">
+      <p *ngIf="lastName.touched && lastName.hasError('required')">
+        <strong>Este campo es requerido</strong>
+      </p>
+    </div>
   </div>
 
   <p>
@@ -129,7 +144,7 @@
 </form>
 
 <hr>
-
+<!--
 <p>
   Name: {{ nameField.valid }}
   <input
@@ -231,4 +246,4 @@
     <input name="zone" type="radio" value="Zona3" [formControl]="zoneField"/>
     Zona3
   </label>
-</p>
+</p> -->

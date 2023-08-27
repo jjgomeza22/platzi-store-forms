@@ -9,6 +9,10 @@ import { FormControl, Validators, FormGroup, FormBuilder } from '@angular/forms'
 export class BasicFormComponent implements OnInit {
 
   public form = new FormGroup({
+    fullName: new FormBuilder().group({
+      name: new FormControl('', [Validators.required, Validators.maxLength(10), Validators.pattern(/^[a-zA-Z]+$/)]),
+      lastName: new FormControl('', [Validators.required, Validators.maxLength(10), Validators.pattern(/^[a-zA-Z]+$/)]),
+    }),
     name: new FormControl('', [Validators.required, Validators.maxLength(10), Validators.pattern(/^[a-zA-Z]+$/)]),
     email: new FormControl('', [Validators.required, Validators.email]),
     phone: new FormControl('', Validators.required),
@@ -59,47 +63,51 @@ export class BasicFormComponent implements OnInit {
   }
 
   get name(){
-    return this.form.get('name');
+    return this.form1.get('fullName').get('name');
+  }
+
+  get lastName() {
+    return this.form1.get('fullName.lastName'); //Evitamos dos get
   }
 
   get email(){
-    return this.form.get('email');
+    return this.form1.get('email');
   }
 
   get phone(){
-    return this.form.get('phone');
+    return this.form1.get('phone');
   }
 
   get color(){
-    return this.form.get('color');
+    return this.form1.get('color');
   }
 
   get date(){
-    return this.form.get('date');
+    return this.form1.get('date');
   }
 
   get age(){
-    return this.form.get('age');
+    return this.form1.get('age');
   }
 
   get category(){
-    return this.form.get('category');
+    return this.form1.get('category');
   }
 
   get tag(){
-    return this.form.get('tag');
+    return this.form1.get('tag');
   }
 
   get agree(){
-    return this.form.get('agree');
+    return this.form1.get('agree');
   }
 
   get gender(){
-    return this.form.get('gender');
+    return this.form1.get('gender');
   }
 
   get zone(){
-    return this.form.get('zone');
+    return this.form1.get('zone');
   }
 
   get isNameFieldValid() {
@@ -111,27 +119,29 @@ export class BasicFormComponent implements OnInit {
   }
 
   save() {
-    if (this.form.valid) {
-      console.log(this.form.value);
+    if (this.form1.valid) {
+      console.log(this.form1.value);
     } else {
-      this.form.markAllAsTouched();
+      this.form1.markAllAsTouched();
     }
   }
 
   private buildForm() {
     this.form1 = this.formBuilder.group({
-      name1: ['', [Validators.required, Validators.maxLength(10)]],
-      email1: [''],
-      phone1: [''],
-      color1: ['#780d0d '],
-      date1: [''],
-      age1: [12],
-      category1: ['category-2'],
-      tag1: [''],
-      agree1: [false],
-      gender1: [''],
-      zone1: [''],
+      fullName: this.formBuilder.group({
+        name: ['', [Validators.required, Validators.maxLength(10), Validators.pattern(/^[a-zA-Z]+$/)]],
+        lastName: ['', [Validators.required, Validators.maxLength(10), Validators.pattern(/^[a-zA-Z]+$/)]],
+      }),
+      email: ['', [Validators.required, Validators.email]],
+      phone: ['', Validators.required],
+      color: ['#780d0d '],
+      date: [''],
+      age: [12, [Validators.required, Validators.min(18), Validators.max(100)]],
+      category: ['category-2'],
+      tag: [''],
+      agree: [false, [Validators.requiredTrue]],
+      gender: [''],
+      zone: [''],
     });
   }
-
 }
