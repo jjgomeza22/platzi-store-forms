@@ -14,7 +14,11 @@ export class CategoriesService {
   ) { }
 
   public getAllCategories() {
-    return this.http.get<Category[]>(`${environment.url_api}/categories/`)
+    return this.http.get<Category[]>(`${environment.url_api}/categories/`);
+  }
+
+  public getCategory(id: string) {
+    return this.http.get<Category>(`${environment.url_api}/categories/${id}`);
   }
 
   public createCategory(data: Partial<Category>) {
@@ -23,5 +27,9 @@ export class CategoriesService {
 
   public updateCategory(id: string, data: Partial<Category>) {
     return this.http.put<Category[]>(`${environment.url_api}/categories/${id}`, data);
+  }
+
+  public checkCategory(name: string) {
+    return this.http.post(`${environment.url_api}/categories/availability`, name);
   }
 }

@@ -10,8 +10,15 @@
               <mat-label>Nombre</mat-label>
               <input placeholder="Nombre" formControlName="name" matInput type="text">
               <div class="messages" *ngIf="name.touched && name.invalid">
+                ke
                 <mat-error *ngIf="name.hasError('required')">
                   Este campo es requerido
+                </mat-error>
+                <mat-error *ngIf="name.hasError('minlength')">
+                  Minimo debe tener 4 caracateres
+                </mat-error>
+                <mat-error *ngIf="name.hasError('name_occupied')">
+                  Este nombre ya no está disponible
                 </mat-error>
               </div>
             </mat-form-field>
