@@ -4,6 +4,8 @@ import { Router } from '@angular/router';
 
 import { AuthService } from './../../../core/services/auth.service';
 
+import { MyValidators } from '../../../utils/validators';
+
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
@@ -38,8 +40,15 @@ export class RegisterComponent implements OnInit {
   private buildForm() {
     this.form = this.formBuilder.group({
       email: ['', [Validators.required]],
-      password: ['', [Validators.required]],
+      password: ['', [Validators.required, Validators.minLength(6), MyValidators.validatePassword]],
     });
   }
 
+  get email(){
+    return this.form.get('email');
+  }
+
+  get password(){
+    return this.form.get('password');
+  }
 }

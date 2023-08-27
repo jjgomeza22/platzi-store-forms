@@ -11,4 +11,19 @@ export class MyValidators {
     return null;
   }
 
+  static validatePassword(control: AbstractControl) {
+    const value = control.value;
+    if (!isValid(value)) {
+      return {invalid_password: true}
+    }
+    return null;
+  }
+}
+
+function isValid (value: string): boolean {
+  return value.split('').some(isNumber);
+}
+
+function isNumber(value: string) {
+  return !isNaN(parseInt(value, 10));
 }
