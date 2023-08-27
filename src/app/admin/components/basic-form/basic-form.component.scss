@@ -14,3 +14,10 @@ input {
     border: 2px solid red;
   }
 }
+
+form {
+  padding: 10px;
+  mat-form-field {
+    width: 100%;
+  }
+}
