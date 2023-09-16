@@ -10,7 +10,15 @@ import { ProductsService } from './../../../core/services/products/products.serv
 })
 export class ProductsComponent implements OnInit {
 
-  products: Product[] = [];
+  products: Product[] = [
+    {
+      _id: '1',
+      description: 'mi producto',
+      image: 'https://randomwordgenerator.com/img/picture-generator/54e8d74b4b56aa14f1dc8460962e33791c3ad6e04e507440752f72d69e4ec0_640.jpg',
+      name: 'correos',
+      price: 12
+    },
+  ];
 
   constructor(
     private productsService: ProductsService

@@ -69,6 +69,12 @@ export class ProductCreateComponent implements OnInit {
       price: ['', [Validators.required, MyValidators.isPriceValid]],
       image: [''],
       description: ['', [Validators.required]],
+      stock: [100, [Validators.required, Validators.maxLength(95)]],
+    });
+
+    this.form.get('stock').valueChanges
+    .subscribe(value => {
+      console.log(value);
     });
   }
 

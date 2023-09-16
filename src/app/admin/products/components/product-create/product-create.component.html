@@ -35,6 +35,15 @@
           <input type="file" (change)="uploadFile($event)">
         </div>
       </div>
+      <div class="row">
+        <div class="col-xs">
+          <app-stepper formControlName="stock"></app-stepper>
+          ke: {{ this.form.get('stock').hasError('maxLengthExceeded') }}
+          <div *ngIf="this.form.get('stock').errors && this.form.get('stock').dirty">
+            <p *ngIf="this.form.get('stock').hasError('maxLengthExceeded')">El minimo es 95</p>
+          </div>
+        </div>
+      </div>
     </mat-card-content>
     <mat-card-actions>
       <button [disabled]="form.invalid" mat-raised-button type="submit">Guardar</button>
