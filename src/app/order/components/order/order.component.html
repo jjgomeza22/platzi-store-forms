@@ -21,11 +21,14 @@
           </div>
         </div>
     </div>
-    
+
   </mat-step>
   <mat-step>
     <ng-template matStepLabel>Datos personales</ng-template>
     <h1>contenifo</h1>
+    <div formArrayName="address" *ngFor="let adres of address.controls;">
+
+    </div>
   </mat-step>
   <mat-step>
     <ng-template matStepLabel>Pago</ng-template>
